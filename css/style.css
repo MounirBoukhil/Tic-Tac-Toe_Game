@@ -1,0 +1,87 @@
+html ,body{
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+/********************* All Header Elements Style *********************/
+header{
+    /* Header Style */
+    width: 100%;
+    height: 50px;
+    background-color: aliceblue;
+    display: flex;
+
+}
+header .logo {
+    /* Logo container style */
+    
+    background-color: red;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+}
+header .logo img{
+    /* Logo image style */
+    background-color: yellow;
+    height: 100%;
+    width: 100px;
+    
+     
+}
+header .parameter{
+    /* icon parameter style */  
+    position: absolute;
+    height: 50px;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    background-color: blue; 
+     
+}
+header .parameter img{
+    /* icon parameter style */
+    background-color: yellow;
+    height: 100%;
+    width: 100px;
+     
+}
+/*********************************************************************/
+
+/********************* All Main Elements Style *********************/
+
+main{
+    /* Header Style */
+    width: 100%;
+    height: 700px;
+    margin: 5px 0px;
+    display: flex; 
+    background-color: bisque;   
+
+}
+main div{
+    height: 100%;
+    width: 100%;
+}
+main .player-container{
+    background-color: rgb(255, 196, 247);
+    flex: 1;
+}
+
+main .game-container{
+    background-color: rgb(220, 255, 196);
+    flex: 4;
+}
+
+@media only screen and (max-width: 1000px) {
+    main{
+        /* Header Style */
+        flex-direction: column; 
+        width: 100%;
+        height: 90vh ;
+        margin: 10px 0px;
+       
+    }
+  }
