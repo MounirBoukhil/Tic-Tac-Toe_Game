@@ -49,9 +49,7 @@ header .parameter img{
      
 }
 /*********************************************************************/
-
 /********************* All Main Elements Style *********************/
-
 main{
     /* Header Style */
     width: 100%;
@@ -68,12 +66,68 @@ main div{
 main .player-container{
     background-color: rgb(255, 196, 247);
     flex: 1;
+    display: flex; 
+    flex-direction: column;
+}
+main .player-container div{
+    background-color: brown;
+    margin: 5px;
 }
 
-main .game-container{
-    background-color: rgb(220, 255, 196);
-    flex: 4;
+main .player-container div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+/********************** Player Number Style ************************/
+main .player-container .Player-Number-container .Player-Number{
+    border-radius: 50%;
+    width: 50%;
+    height: 90%;
+    background-color: yellow;
+}
+/*******************************************************************/
+/********************** Player Score Style ************************/
+main .player-container .Player-Score-container{
+    flex-direction: column;
+    color: aliceblue;
+}
+main .player-container .Player-Score-container h2{
+    margin: 10px ;
+}
+/*******************************************************************/
+/********************** Player Timer Style ************************/
+main .player-container .Player-Timer-container .Timer{
+    width: 90%;
+    height: 40%;
+    background-color: aqua;
+}
+/*******************************************************************/
+/************************** Game Style *****************************/
+
+main .game-container  {
+    background-color: rgb(220, 255, 196);
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main .game-container table,tr,td {
+    border: 1px solid;
+}
+main .game-container table {
+    display: flex;
+}
+main .game-container table tr{
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+main .game-container table tr td {
+   background-color: blueviolet;
+}
+
+/*******************************************************************/
 
 @media only screen and (max-width: 1000px) {
     main{
@@ -84,4 +138,17 @@ main .game-container{
         margin: 10px 0px;
        
     }
+    main .player-container{
+        flex-direction:row;
+    }
+    /********************** Player Score Style ************************/
+    main .player-container .Player-Score-container h2{
+        margin: 2px ;
+    }
+    /*******************************************************************/
+    /********************** Player Number Style ************************/
+    main .player-container .Player-Number-container .Player-Number{
+        height: 70%;
+    }
+    /*******************************************************************/
   }
