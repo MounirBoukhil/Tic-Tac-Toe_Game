@@ -118,18 +118,16 @@ main .game-container table,tr,td {
 main .game-container table {
     display: flex;
 }
-main .game-container table tr{
-    height: 100%;
-    width: 100%;
-    display: flex;
-}
 main .game-container table tr td {
    background-color: blueviolet;
+   height: 220px;
+   width: 250px;
 }
 
 /*******************************************************************/
 
 @media only screen and (max-width: 1000px) {
+    /*###################################### Header Style ######################################*/
     main{
         /* Header Style */
         flex-direction: column; 
@@ -141,14 +139,26 @@ main .game-container table tr td {
     main .player-container{
         flex-direction:row;
     }
-    /********************** Player Score Style ************************/
+    /*##########################################################################################*/
+    /*################################# Player Container Style #################################*/
+    .top{
+        transform: rotate(180deg);
+    }
+    /********************** Player Score Style **********************/
     main .player-container .Player-Score-container h2{
         margin: 2px ;
     }
-    /*******************************************************************/
-    /********************** Player Number Style ************************/
+    /*****************************************************************/
+    /********************** Player Number Style **********************/
     main .player-container .Player-Number-container .Player-Number{
         height: 70%;
     }
     /*******************************************************************/
+    /************************** Game Style *****************************/
+    main .game-container table tr td {
+        height: 20vh;
+        width: 30vw;
+     }
+    /*******************************************************************/
+    /*##########################################################################################*/
   }
