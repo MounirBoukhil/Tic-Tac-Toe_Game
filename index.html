@@ -73,5 +73,37 @@
             </section>
         <!-------------------------------------------------->
     </main>
+    <!----------------- game settings ------------------>
+    <section class="game-settings-container">
+        <div>
+        <table>
+            <tr>
+                <td><label for="fname"><h3>Number of Rounds:</h3></label></td>
+                <td>
+                    <input list="Round-Number">
+                    <datalist id="Round-Number">
+                        <option value="1 Round">
+                        <option value="3 Rounds">
+                        <option value="5 Rounds">
+                    </datalist>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="lname"><h3>Player Timer:</h3></label></td>
+                <td>
+                    <input list="browsers">
+                    <datalist id="browsers">
+                        <option value="1 min">
+                        <option value="2 min">
+                        <option value="5 min">
+                        <option value="10 min">
+                    </datalist>
+                </td>
+            </tr>
+            <tr><td colspan="2"><button>Start game</button></td></tr>
+        </table>
+        </div>
+    </section>
+    <!-------------------------------------------------->
 </body>
 </html>

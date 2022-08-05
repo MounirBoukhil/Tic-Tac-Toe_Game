@@ -51,19 +51,17 @@ header .parameter img{
 /*********************************************************************/
 /********************* All Main Elements Style *********************/
 main{
-    /* Header Style */
-    width: 100%;
-    height: 700px;
-    margin: 5px 0px;
+    /* Header Style */ 
     display: flex; 
     background-color: bisque;   
 
 }
-main div{
+main .player-container div{
     height: 100%;
-    width: 100%;
+    width: 95%;
 }
 main .player-container{
+    margin: 0px;
     background-color: rgb(255, 196, 247);
     flex: 1;
     display: flex; 
@@ -106,6 +104,7 @@ main .player-container .Player-Timer-container .Timer{
 /************************** Game Style *****************************/
 
 main .game-container  {
+    margin: 0px;
     background-color: rgb(220, 255, 196);
     flex: 3;
     display: flex;
@@ -123,9 +122,63 @@ main .game-container table tr td {
    height: 220px;
    width: 250px;
 }
-
 /*******************************************************************/
-
+/*##########################################################################################*/
+/*##################################### Game Settings ######################################*/
+.game-settings-container{
+    background-color: rgba(0, 0, 2, 0.635);
+    position:fixed;
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.game-settings-container div{
+    cursor: context-menu;
+    background-color: rgb(2, 184, 142);
+    height: 300px;
+    width: 450px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+}
+.game-settings-container table{
+   margin: 5px;
+}
+.game-settings-container table tr td{
+    height: 60px;
+    border: solid 0px ;
+    font-size: 20px;
+    text-align: center;
+}
+.game-settings-container table tr td h3{
+    padding: 0px;
+    text-align: left;
+}
+.game-settings-container table tr td input{
+    font-size: 15px;
+    width: 70%;
+}
+.game-settings-container table tr td button{
+    cursor: pointer;
+    transition: 0.5s;
+    width: 80%;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: solid 1px;
+    background-color: rgba(255, 222, 173, 0);
+}
+.game-settings-container table tr td button:hover{
+    background-color: blanchedalmond;
+}
+/*##########################################################################################*/
+ 
 @media only screen and (max-width: 1000px) {
     /*###################################### Header Style ######################################*/
     main{
@@ -144,9 +197,13 @@ main .game-container table tr td {
     .top{
         transform: rotate(180deg);
     }
+    main .player-container{
+        height: 10vh;
+    }
     /********************** Player Score Style **********************/
     main .player-container .Player-Score-container h2{
         margin: 2px ;
+        font-size: 2.5vh;
     }
     /*****************************************************************/
     /********************** Player Number Style **********************/
@@ -161,4 +218,24 @@ main .game-container table tr td {
      }
     /*******************************************************************/
     /*##########################################################################################*/
+    /*##################################### Game Settings Style ######################################*/
+    .game-settings-container div{
+        height: 250px;
+        width: 350px;
+    }
+    .game-settings-container table tr td{
+        font-size: 15px;
+    }
+    .game-settings-container table tr td input{
+        font-size: 10px;
+        width: 60%;
+    }
+    .game-settings-container table tr td button{
+        width: 70%;
+        padding: 5px;
+        font-size: 15px;
+    }
+    /*##########################################################################################*/ 
   }
+
+  
