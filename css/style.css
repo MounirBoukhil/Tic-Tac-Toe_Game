@@ -104,7 +104,6 @@ main .player-container .Player-Timer-container .Timer{
 }
 /*******************************************************************/
 /************************** Game Style *****************************/
-
 main .game-container  {
     margin: 0px;
     background-color: rgb(220, 255, 196);
@@ -123,13 +122,17 @@ main .game-container table tr td {
    background-color: blueviolet;
    height: 220px;
    width: 250px;
+   cursor: pointer;
 }
+main .game-container table tr td:hover {
+    background-color: rgb(192, 226, 43);
+ }
 main .game-container table tr td h1{
     margin: 0px;
     text-align: center;
     font-size: 180px;
     font-family: 'Lato', sans-serif;
- }
+}
 /*******************************************************************/
 /*##########################################################################################*/
 /*##################################### Game Settings ######################################*/
