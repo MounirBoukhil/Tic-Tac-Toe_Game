@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
+
 html ,body{
     margin: 0px;
     padding: 0px;
@@ -122,6 +124,12 @@ main .game-container table tr td {
    height: 220px;
    width: 250px;
 }
+main .game-container table tr td h1{
+    margin: 0px;
+    text-align: center;
+    font-size: 180px;
+    font-family: 'Lato', sans-serif;
+ }
 /*******************************************************************/
 /*##########################################################################################*/
 /*##################################### Game Settings ######################################*/
@@ -235,6 +243,9 @@ main .game-container table tr td {
         padding: 5px;
         font-size: 15px;
     }
+    main .game-container table tr td h1{
+        font-size: 7em;
+     }
     /*##########################################################################################*/ 
   }
 
