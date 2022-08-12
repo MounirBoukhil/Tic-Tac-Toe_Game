@@ -11,6 +11,12 @@ class Player{
         this.numberOfLosses=numberOfLosses;
         this.symbol=symbol;
     }
+    addWin(){
+        this.numberOfWins+=1;
+    }
+    addLosse(){
+        this.numberOfLosses+=1;
+    }
 }
 
 class Board{
@@ -84,7 +90,9 @@ class Game{
         if (this.moves[Number(index[0])][Number(index[1])]=="-") {
             this.board.addMove(Number(index[0]),Number(index[1]),player.symbol)
             this.moves[Number(index[0])][Number(index[1])]=player.symbol;
-            this.#checkWins(player.symbol)
+            if (this.#checkWins(player.symbol)) {
+                this.#showResult()
+            } 
             return true   
         }
         
@@ -93,7 +101,19 @@ class Game{
     #checkWins(symbol){
         // This method will check if the player has won.
         if(this.#checkLines(symbol) || this.#checkColumns(symbol) || this.#checkDiagonals(symbol)){
+            if (this.turn==1) {
+                this.players.player1.addWin();
+                this.players.player2.addLosse();
+            }
+            else{
+                this.players.player2.addWin();
+                this.players.player1.addLosse();
+            }
+            this.rounds-=1;
             console.log("WINN");
+            console.log(`Player1:${this.players.player1.numberOfWins}`);
+            console.log(`Player2:${this.players.player2.numberOfWins}`);
+            console.log(`Rounds:${this.rounds}`);
             return true;
         }
         else{
@@ -157,6 +177,12 @@ class Game{
             return false
         }
     }
+    #showResult(){
+        const resultContainer=document.querySelector('.game-Result');
+        const gameResultContainer = document.querySelector('.game-result-container');
+        resultContainer.innerHTML=`Player ${this.turn} Won this round`
+        gameResultContainer.classList.toggle("hidden")
+    }
 }
-const g = new Game(2,2)
+const g = new Game(1,2)
 g.addEventListenersToBoaed();

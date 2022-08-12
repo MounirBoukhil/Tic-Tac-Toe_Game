@@ -6,7 +6,6 @@ html ,body{
     height: 100%;
     width: 100%;
 }
-
 /********************* All Header Elements Style *********************/
 header{
     /* Header Style */
@@ -252,4 +251,6 @@ main .game-container table tr td h1{
     /*##########################################################################################*/ 
   }
 
-  
+.hidden{
+    display: none;
+}  
