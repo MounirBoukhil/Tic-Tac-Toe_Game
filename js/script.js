@@ -90,8 +90,15 @@ class Game{
         if (this.moves[Number(index[0])][Number(index[1])]=="-") {
             this.board.addMove(Number(index[0]),Number(index[1]),player.symbol)
             this.moves[Number(index[0])][Number(index[1])]=player.symbol;
-            if (this.#checkWins(player.symbol)) {
-                this.#showResult()
+            //console.log("Tie="+this.#CheckTie());
+
+            if (this.#checkWins(player.symbol)){
+                this.#showResult(this.turn)
+            }
+            else{
+                if (!this.#CheckTie()) {
+                    this.#showResult()
+                }
             } 
             return true   
         }
@@ -119,7 +126,23 @@ class Game{
         else{
             return false;
          }
-
+    }
+    #CheckTie(){
+        /* 
+           This method will check if the result was tie
+           by checking if all the boxes is played
+        */
+        let rslt=false;
+        let linerslt=false;
+        this.moves.forEach((line)=>{
+            linerslt=line.find((elm)=>{
+                return elm=="-" ;
+            })
+            if (linerslt=="-") {
+                rslt= true;  
+            }
+        })
+        return rslt;
     }
     #checkLines(symbol){
         /*this method will check the lines of the board to identify 
@@ -177,10 +200,15 @@ class Game{
             return false
         }
     }
-    #showResult(){
+    #showResult(prop=NaN){
         const resultContainer=document.querySelector('.game-Result');
         const gameResultContainer = document.querySelector('.game-result-container');
-        resultContainer.innerHTML=`Player ${this.turn} Won this round`
+        if (prop) {
+            resultContainer.innerHTML=`Player ${prop} Won this round`
+        }
+        else{
+        resultContainer.innerHTML=`The result is a draw` 
+        }
         gameResultContainer.classList.toggle("hidden")
     }
 }
