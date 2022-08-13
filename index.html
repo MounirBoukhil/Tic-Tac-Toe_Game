@@ -25,9 +25,9 @@
                 <div class="Player-Score-container">
                     <p>
                         <h2>Player 1</h2>
-                        <h2>Wins = 2<span></span></h2>
-                        <h2>Draws = 2<span></span></h2>
-                        <h2>Losses = 2<span></span></h2>
+                        <h2 class="player1-wins">Wins = 0<span></span></h2>
+                        <h2 class="player1-draws">Draws = 0<span></span></h2>
+                        <h2 class="player1-losses">Losses = 0<span></span></h2>
                     </p>
                 </div>
                 <div class="Player-Timer-container">
@@ -66,9 +66,9 @@
                 <div class="Player-Score-container">
                     <p>
                         <h2>Player 2</h2>
-                        <h2>Wins = 4<span></span></h2>
-                        <h2>Draws = 3<span></span></h2>
-                        <h2>Losses = 1<span></span></h2>
+                        <h2 class="player2-wins">Wins = 0<span></span></h2>
+                        <h2 class="player2-draws">Draws = 0<span></span></h2>
+                        <h2 class="player2-losses">Losses = 0<span></span></h2>
                     </p>
                 </div>
                 <div class="Player-Timer-container">
@@ -79,14 +79,13 @@
             </section>
         <!-------------------------------------------------->
         <!----------------- game settings ------------------>
-        <!--
-            <section class="game-settings-container">
+            <section class="game-settings-container game-settings ">
                 <div>
                 <table>
                     <tr>
                         <td><label for="fname"><h3>Number of Rounds:</h3></label></td>
                         <td>
-                            <input list="Round-Number">
+                            <input list="Round-Number" class="game-rounds-number">
                             <datalist id="Round-Number">
                                 <option value="1 Round">
                                 <option value="3 Rounds">
@@ -97,7 +96,7 @@
                     <tr>
                         <td><label for="lname"><h3>Player time:</h3></label></td>
                         <td>
-                            <input list="browsers">
+                            <input list="browsers" class="game-time">
                             <datalist id="browsers">
                                 <option value="1 min">
                                 <option value="2 min">
@@ -106,11 +105,13 @@
                             </datalist>
                         </td>
                     </tr>
-                    <tr><td colspan="2"><button>Start a new game</button></td></tr>
+                    <tr><td colspan="2">
+                        <button class="game-setting-button">Start Game</button>
+                    </td></tr>
                 </table>
                 </div>
             </section>
-    -->     
+
             <section class="game-settings-container game-result-container hidden">
                 <div>
                 <table>
@@ -126,5 +127,6 @@
     </main>
 
     <script src="js/script.js"></script>
+    <script src="js/gameScript.js"></script>
 </body>
 </html>

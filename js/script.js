@@ -1,7 +1,4 @@
 "use strict"
-const boxes = document.querySelectorAll(".box");
-
-
 /* Palyer class */
 class Player{
     constructor(id,time,numberOfWins,numberOfLosses,symbol){
@@ -12,10 +9,14 @@ class Player{
         this.symbol=symbol;
     }
     addWin(){
+        const playerWinnInterface=document.querySelector(`.player${this.id}-wins`);
         this.numberOfWins+=1;
+        playerWinnInterface.innerHTML=`Wins = ${this.numberOfWins}`;
     }
     addLosse(){
+        const playerLossesInterface=document.querySelector(`.player${this.id}-losses`);
         this.numberOfLosses+=1;
+        playerLossesInterface.innerHTML=`Losses = ${this.numberOfLosses}`;
     }
 }
 
@@ -63,6 +64,7 @@ class Game{
             player2: new Player(2,time,0,0,"O")
         };
     }
+   
     addEventListenersToBoaed(){
         //this function will add event listener to a bunch of elements
         this.board.boxes.forEach((line)=>{
@@ -212,5 +214,11 @@ class Game{
         gameResultContainer.classList.toggle("hidden")
     }
 }
-const g = new Game(1,2)
-g.addEventListenersToBoaed();
+
+
+/*
+    I added gameScript 
+        addWin() method
+        addLosse() method
+
+*/
