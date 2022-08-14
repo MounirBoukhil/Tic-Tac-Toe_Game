@@ -1,12 +1,14 @@
 "use strict"
 /* Palyer class */
 class Player{
-    constructor(id,time,numberOfWins,numberOfLosses,symbol){
+    constructor(id,time,symbol){
         this.id=id;
         this.time=time;
-        this.numberOfWins=numberOfWins;
-        this.numberOfLosses=numberOfLosses;
+        this.numberOfWins=0;
+        this.numberOfLosses=0;
+        this.numberOfDraws=0;
         this.symbol=symbol;
+        console.log(`Symbol : ${this.symbol}`);
     }
     addWin(){
         const playerWinnInterface=document.querySelector(`.player${this.id}-wins`);
@@ -17,6 +19,11 @@ class Player{
         const playerLossesInterface=document.querySelector(`.player${this.id}-losses`);
         this.numberOfLosses+=1;
         playerLossesInterface.innerHTML=`Losses = ${this.numberOfLosses}`;
+    }
+    addDraws(){
+        const playerDrawsInterface=document.querySelector(`.player${this.id}-draws`);
+        this.numberOfDraws+=1;
+        playerDrawsInterface.innerHTML=`Draws = ${this.numberOfDraws}`;
     }
 }
 
@@ -56,12 +63,13 @@ class Game{
     constructor(rounds,time){
         this.moves=[["-","-","-"],["-","-","-"],["-","-","-"]];
         this.rounds=rounds;
-        this.turn=1;
+        this.startPlayer=1
+        this.turn=this.startPlayer;
         this.board=new Board()
         this.board.createBoard();
         this.players={
-            player1: new Player(1,time,0,0,"X"),
-            player2: new Player(2,time,0,0,"O")
+            player1: new Player(1,time,"X"),
+            player2: new Player(2,time,"O")
         };
     }
    
@@ -81,10 +89,28 @@ class Game{
                         }
                     }
                 }
-                console.log(this.moves);
-            })
+                })
             })
         })
+    }
+    startNewRound(){
+        this.moves=[["-","-","-"],["-","-","-"],["-","-","-"]];
+        this.board.createBoard();
+        this.#switchSymbol();
+        if (this.startPlayer==1) {
+            this.startPlayer=2;
+            this.turn=this.startPlayer;
+        }else{
+            this.startPlayer=1;
+            this.turn=this.startPlayer;
+        }
+    }
+    #switchSymbol(){
+        let symbol=this.players.player1.symbol;
+        this.players.player1.symbol=this.players.player2.symbol;
+        this.players.player2.symbol=symbol;
+        console.log(`player1: ${this.players.player1.symbol}`);
+        console.log(`player2: ${this.players.player2.symbol}`);
     }
     #addPlayerMove(player,index){
         /*This method will add player move and show it in the board and also
@@ -118,11 +144,11 @@ class Game{
                 this.players.player2.addWin();
                 this.players.player1.addLosse();
             }
-            this.rounds-=1;
-            console.log("WINN");
-            console.log(`Player1:${this.players.player1.numberOfWins}`);
-            console.log(`Player2:${this.players.player2.numberOfWins}`);
-            console.log(`Rounds:${this.rounds}`);
+             this.rounds-=1;
+            // console.log("WINN");
+            // console.log(`Player1:${this.players.player1.numberOfWins}`);
+            // console.log(`Player2:${this.players.player2.numberOfWins}`);
+            // console.log(`Rounds:${this.rounds}`);
             return true;
         }
         else{
@@ -144,6 +170,10 @@ class Game{
                 rslt= true;  
             }
         })
+        if (!rslt) {
+            this.players.player1.addDraws();
+            this.players.player2.addDraws();
+        }
         return rslt;
     }
     #checkLines(symbol){
