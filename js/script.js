@@ -104,13 +104,12 @@ class Game{
             this.startPlayer=1;
             this.turn=this.startPlayer;
         }
+        this.rounds-=1
     }
     #switchSymbol(){
         let symbol=this.players.player1.symbol;
         this.players.player1.symbol=this.players.player2.symbol;
         this.players.player2.symbol=symbol;
-        console.log(`player1: ${this.players.player1.symbol}`);
-        console.log(`player2: ${this.players.player2.symbol}`);
     }
     #addPlayerMove(player,index){
         /*This method will add player move and show it in the board and also
@@ -118,14 +117,21 @@ class Game{
         if (this.moves[Number(index[0])][Number(index[1])]=="-") {
             this.board.addMove(Number(index[0]),Number(index[1]),player.symbol)
             this.moves[Number(index[0])][Number(index[1])]=player.symbol;
-            //console.log("Tie="+this.#CheckTie());
 
-            if (this.#checkWins(player.symbol)){
-                this.#showResult(this.turn)
+            if (this.#checkWins(player.symbol)){ 
+                if (this.rounds>1) {
+                    this.#showResult(this.turn)   
+                }else{
+                    this.showGameResult()
+                }
             }
             else{
                 if (!this.#CheckTie()) {
-                    this.#showResult()
+                    if (this.rounds>1) {
+                        this.#showResult()
+                    }else{
+                        this.showGameResult()
+                    }
                 }
             } 
             return true   
@@ -144,7 +150,6 @@ class Game{
                 this.players.player2.addWin();
                 this.players.player1.addLosse();
             }
-             this.rounds-=1;
             // console.log("WINN");
             // console.log(`Player1:${this.players.player1.numberOfWins}`);
             // console.log(`Player2:${this.players.player2.numberOfWins}`);
@@ -233,15 +238,31 @@ class Game{
         }
     }
     #showResult(prop=NaN){
-        const resultContainer=document.querySelector('.game-Result');
-        const gameResultContainer = document.querySelector('.game-result-container');
+        const resultContainer=document.querySelector('.round-Result');
+        const roundResultContainer = document.querySelector('.round-result-container');
         if (prop) {
             resultContainer.innerHTML=`Player ${prop} Won this round`
         }
         else{
         resultContainer.innerHTML=`The result is a draw` 
         }
-        gameResultContainer.classList.toggle("hidden")
+        roundResultContainer.classList.toggle("hidden")
+    }
+    showGameResult(){
+        const resultContainer=document.querySelector('.game-Result');
+        const roundResultContainer = document.querySelector('.game-result-container');
+        if (this.players.player1.numberOfWins==this.players.player2.numberOfWins) {
+            resultContainer.innerHTML=`The result is a Draw`
+        }
+        else{
+            if (this.players.player1.numberOfWins>this.players.player2.numberOfWins) {
+                resultContainer.innerHTML=`Player 1 Won this Game`
+            }
+            else{
+                resultContainer.innerHTML=`Player 2 Won this Game`
+            } 
+        }
+        roundResultContainer.classList.toggle("hidden")
     }
 }
 
