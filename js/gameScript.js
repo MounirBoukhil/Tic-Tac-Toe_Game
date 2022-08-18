@@ -38,8 +38,17 @@ const startGame =function(){
     })
     
 }
+gameSettingButton.addEventListener("click",startGame);
 
-gameSettingButton.addEventListener("click",startGame)
+//  let time=4*60;
+// function conter(){
+//      const timer = document.querySelector(".player1-timer");
+//      const minutes=Math.floor(time/60);
+//      let seconds=time%60;
+//      timer.innerHTML=`${minutes}:${seconds < 10 ? '0' + seconds :seconds}`;
+//      time--;
+// }
+//  setInterval(conter,1000);
 
 
 

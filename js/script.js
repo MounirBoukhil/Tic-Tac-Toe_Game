@@ -3,11 +3,12 @@
 class Player{
     constructor(id,time,symbol){
         this.id=id;
-        this.time=time;
+        this.time=time*60;
         this.numberOfWins=0;
         this.numberOfLosses=0;
         this.numberOfDraws=0;
         this.symbol=symbol;
+        this.active=false
         console.log(`Symbol : ${this.symbol}`);
     }
     addWin(){
@@ -24,6 +25,40 @@ class Player{
         const playerDrawsInterface=document.querySelector(`.player${this.id}-draws`);
         this.numberOfDraws+=1;
         playerDrawsInterface.innerHTML=`Draws = ${this.numberOfDraws}`;
+    }
+    startTurn(){
+        this.active=true;
+        this.#startTimer();
+    }
+    stopTurn(){
+        if (this.active) {
+            clearInterval(this.active);
+            this.#updateTimer()
+        }
+    }
+    #startTimer(){
+        let seconds=this.time;
+        let minutes =0;
+        const timerContainer = document.querySelector(`.player${this.id}-timer`);
+        console.log(this.time); 
+        //console.log(timerContainer);
+        function conter(){
+            minutes = Math.floor(seconds/60);
+            let s=seconds%60;
+            timerContainer.innerHTML=`${minutes}:${s < 10 ? '0' + s :s}`;
+            timerContainer.setAttribute("time", `${seconds}`);
+            console.log(`${minutes}:${s < 10 ? '0' + s :s}`);
+            seconds--;
+            
+        }
+        console.log(this.time);
+        this.active=setInterval(conter,1000);
+    }
+    #updateTimer(){
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        const timerContainer = document.querySelector(`.player${this.id}-timer`);
+        this.time= Number(timerContainer.getAttribute("time"));
+        console.log(this.time);
     }
 }
 
@@ -81,11 +116,15 @@ class Game{
                 if (this.turn==1) {
                     if(this.#addPlayerMove(this.players.player1,box.id)){
                         this.turn=2;
+                        this.players.player2.stopTurn()
+                        this.players.player1.startTurn()
                     }
                 }else{
                     if (this.turn==2) {
                         if(this.#addPlayerMove(this.players.player2,box.id)){
                             this.turn=1; 
+                            this.players.player1.stopTurn()
+                            this.players.player2.startTurn()
                         }
                     }
                 }
