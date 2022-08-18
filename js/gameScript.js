@@ -14,6 +14,7 @@ const startGame =function(){
         const gTime= Number(gameTime.value.replace("min",""));
         const g = new Game(gRounds,gTime); 
         g.addEventListenersToBoaed();
+        g.players.player1.startTurn();
         gameSettings.classList.toggle("hidden")  
     
         roundResult.addEventListener("click",(elm)=>{

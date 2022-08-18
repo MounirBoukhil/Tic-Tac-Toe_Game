@@ -116,15 +116,15 @@ class Game{
                 if (this.turn==1) {
                     if(this.#addPlayerMove(this.players.player1,box.id)){
                         this.turn=2;
-                        this.players.player2.stopTurn()
-                        this.players.player1.startTurn()
+                        this.players.player1.stopTurn()
+                        this.players.player2.startTurn()
                     }
                 }else{
                     if (this.turn==2) {
                         if(this.#addPlayerMove(this.players.player2,box.id)){
                             this.turn=1; 
-                            this.players.player1.stopTurn()
-                            this.players.player2.startTurn()
+                            this.players.player2.stopTurn()
+                            this.players.player1.startTurn()
                         }
                     }
                 }
@@ -166,6 +166,7 @@ class Game{
             }
             else{
                 if (!this.#CheckTie()) {
+                     
                     if (this.rounds>1) {
                         this.#showResult()
                     }else{
