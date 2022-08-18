@@ -29,10 +29,8 @@ class Player{
     setTime(curentTime){
         this.stopTurn();
         const timerContainer = document.querySelector(`.player${this.id}-timer`);
-        console.log(timerContainer);
         timerContainer.innerHTML=`${curentTime/60}:00`
         timerContainer.setAttribute("time", `${curentTime}`);
-        console.log(curentTime);
     }
     startTurn(){
         this.active=true;
@@ -41,14 +39,14 @@ class Player{
     stopTurn(){
         if (this.active) {
             clearInterval(this.active);
+            this.active=false;
         }
     }
     #startTimer(){
         const timerContainer = document.querySelector(`.player${this.id}-timer`);
         let seconds=Number(timerContainer.getAttribute("time"));
-        console.log(`seconds: ${seconds}`);
         let minutes =0;
-        //console.log(timerContainer);
+        console.log(`Start timer ${this.id}`);
         function conter(){
             minutes = Math.floor(seconds/60);
             let s=seconds%60;
@@ -68,7 +66,6 @@ class Board{
     createBoard(){
         this.boxes.forEach(line=>{
             line.forEach(box=>{
-                //box.addEventListener("click",()=>{console.log("clik")})
                 box.innerHTML="-";})
         })
     }
@@ -76,7 +73,6 @@ class Board{
         this.boxes[lineIndex][rowIndex].innerHTML=character
     }
     #createMatrix(list){
-        //this method will change a list to 3X3 matrix
         let matrix=[[new Array()],[new Array()],[new Array()]]
         let i=0;
         let j=0;
@@ -109,21 +105,33 @@ class Game{
    
     addEventListenersToBoaed(){
         //this function will add event listener to a bunch of elements
+        let playerMoverResult=false
         this.board.boxes.forEach((line)=>{
             line.forEach((box)=>{
                 box.addEventListener("click",()=>{
                 if (this.turn==1) {
-                    if(this.#addPlayerMove(this.players.player1,box.id)){
+                    playerMoverResult=this.#addPlayerMove(this.players.player1,box.id);
+                    if(playerMoverResult){
                         this.turn=2;
-                        this.players.player1.stopTurn()
-                        this.players.player2.startTurn()
+                        console.log("This is it");
+                        ///////////////////////////////9999999999999999999999999999999999999999//////
+                        this.players.player1.stopTurn();
+                        if (playerMoverResult!="Round ended") {
+                            this.players.player2.startTurn(); 
+                        }
+                        playerMoverResult=false;
                     }
                 }else{
                     if (this.turn==2) {
-                        if(this.#addPlayerMove(this.players.player2,box.id)){
+                        playerMoverResult=this.#addPlayerMove(this.players.player2,box.id);
+                        if(playerMoverResult){
                             this.turn=1; 
+                            console.log("This is it");
                             this.players.player2.stopTurn()
-                            this.players.player1.startTurn()
+                            if (playerMoverResult!="Round ended") {
+                                this.players.player1.startTurn(); 
+                            }
+                            playerMoverResult=false;
                         }
                     }
                 }
@@ -132,13 +140,11 @@ class Game{
         })
     }
     startNewRound(){
-         
         this.moves=[["-","-","-"],["-","-","-"],["-","-","-"]];
         this.board.createBoard();
         this.#switchSymbol();
-        ////////////////////////////////////////////////////////////////////////
         this.players.player1.setTime(this.players.player1.time);
-        this.players.player2.setTime(this.players.player2.time);
+        this.players.player2.setTime(this.players.player2.time); 
         if (this.startPlayer==1) {
             this.players.player2.startTurn();
             this.startPlayer=2;
@@ -163,20 +169,35 @@ class Game{
             this.moves[Number(index[0])][Number(index[1])]=player.symbol;
 
             if (this.#checkWins(player.symbol)){ 
+                /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
+                /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
+                console.log("Stop Turn");
+                this.players.player1.stopTurn();
+                this.players.player2.stopTurn();
+                /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
+                /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
                 if (this.rounds>1) {
                     this.#showResult(this.turn)   
                 }else{
                     this.showGameResult()
                 }
+                return "Round ended"
             }
             else{
                 if (!this.#CheckTie()) {
-                     
+                    /*5555555555555555555555555555555555555555555555555555555555555555555555555555*/
+                    /*5555555555555555555555555555555555555555555555555555555555555555555555555555*/
+                    console.log("Stop Turn");
+                    this.players.player1.stopTurn();
+                    this.players.player2.stopTurn();
+                    /*5555555555555555555555555555555555555555555555555555555555555555555555555555*/
+                    /*5555555555555555555555555555555555555555555555555555555555555555555555555555*/
                     if (this.rounds>1) {
                         this.#showResult()
                     }else{
                         this.showGameResult()
                     }
+                    return "Round ended"
                 }
             } 
             return true   
@@ -195,10 +216,6 @@ class Game{
                 this.players.player2.addWin();
                 this.players.player1.addLosse();
             }
-            // console.log("WINN");
-            // console.log(`Player1:${this.players.player1.numberOfWins}`);
-            // console.log(`Player2:${this.players.player2.numberOfWins}`);
-            // console.log(`Rounds:${this.rounds}`);
             return true;
         }
         else{
@@ -285,13 +302,20 @@ class Game{
     #showResult(prop=NaN){
         const resultContainer=document.querySelector('.round-Result');
         const roundResultContainer = document.querySelector('.round-result-container');
+        /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
+        /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
+        console.log("Stop Turn");
+        this.players.player1.stopTurn();
+        this.players.player2.stopTurn();
+        /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
+        /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
         if (prop) {
-            resultContainer.innerHTML=`Player ${prop} Won this round`
+            resultContainer.innerHTML=`Player ${prop} Won this round`;
         }
         else{
-        resultContainer.innerHTML=`The result is a draw` 
+        resultContainer.innerHTML=`The result is a draw`; 
         }
-        roundResultContainer.classList.toggle("hidden")
+        roundResultContainer.classList.toggle("hidden");
     }
     showGameResult(){
         const resultContainer=document.querySelector('.game-Result');
@@ -310,11 +334,3 @@ class Game{
         roundResultContainer.classList.toggle("hidden")
     }
 }
-
-
-/*
-    I added gameScript 
-        addWin() method
-        addLosse() method
-
-*/

@@ -20,8 +20,7 @@ const startGame =function(){
         roundResult.addEventListener("click",(elm)=>{
 
             if (elm.target.className=="submit-btn") {
-               console.log(roundResult.classList.toggle("hidden"));; 
-               console.log(g.rounds);
+               roundResult.classList.toggle("hidden");
                if (g.rounds>1) {
                 g.startNewRound() 
                }
