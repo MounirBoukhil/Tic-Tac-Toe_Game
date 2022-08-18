@@ -9,7 +9,7 @@ class Player{
         this.numberOfDraws=0;
         this.symbol=symbol;
         this.active=false
-        console.log(`Symbol : ${this.symbol}`);
+        this.setTime(this.time);
     }
     addWin(){
         const playerWinnInterface=document.querySelector(`.player${this.id}-wins`);
@@ -26,6 +26,14 @@ class Player{
         this.numberOfDraws+=1;
         playerDrawsInterface.innerHTML=`Draws = ${this.numberOfDraws}`;
     }
+    setTime(curentTime){
+        this.stopTurn();
+        const timerContainer = document.querySelector(`.player${this.id}-timer`);
+        console.log(timerContainer);
+        timerContainer.innerHTML=`${curentTime/60}:00`
+        timerContainer.setAttribute("time", `${curentTime}`);
+        console.log(curentTime);
+    }
     startTurn(){
         this.active=true;
         this.#startTimer();
@@ -33,32 +41,23 @@ class Player{
     stopTurn(){
         if (this.active) {
             clearInterval(this.active);
-            this.#updateTimer()
         }
     }
     #startTimer(){
-        let seconds=this.time;
-        let minutes =0;
         const timerContainer = document.querySelector(`.player${this.id}-timer`);
-        console.log(this.time); 
+        let seconds=Number(timerContainer.getAttribute("time"));
+        console.log(`seconds: ${seconds}`);
+        let minutes =0;
         //console.log(timerContainer);
         function conter(){
             minutes = Math.floor(seconds/60);
             let s=seconds%60;
             timerContainer.innerHTML=`${minutes}:${s < 10 ? '0' + s :s}`;
             timerContainer.setAttribute("time", `${seconds}`);
-            console.log(`${minutes}:${s < 10 ? '0' + s :s}`);
             seconds--;
             
         }
-        console.log(this.time);
-        this.active=setInterval(conter,1000);
-    }
-    #updateTimer(){
-        /////////////////////////////////////////////////////////////////////////////////////////////
-        const timerContainer = document.querySelector(`.player${this.id}-timer`);
-        this.time= Number(timerContainer.getAttribute("time"));
-        console.log(this.time);
+        this.active=setInterval(conter,900);
     }
 }
 
@@ -133,13 +132,19 @@ class Game{
         })
     }
     startNewRound(){
+         
         this.moves=[["-","-","-"],["-","-","-"],["-","-","-"]];
         this.board.createBoard();
         this.#switchSymbol();
+        ////////////////////////////////////////////////////////////////////////
+        this.players.player1.setTime(this.players.player1.time);
+        this.players.player2.setTime(this.players.player2.time);
         if (this.startPlayer==1) {
+            this.players.player2.startTurn();
             this.startPlayer=2;
             this.turn=this.startPlayer;
         }else{
+            this.players.player1.startTurn();
             this.startPlayer=1;
             this.turn=this.startPlayer;
         }
