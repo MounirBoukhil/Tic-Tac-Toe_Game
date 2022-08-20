@@ -9,7 +9,6 @@ class Player{
         this.numberOfDraws=0;
         this.symbol=symbol;
         this.active=false
-        this.setTime(this.time);
     }
     addWin(){
         const playerWinnInterface=document.querySelector(`.player${this.id}-wins`);
@@ -26,37 +25,37 @@ class Player{
         this.numberOfDraws+=1;
         playerDrawsInterface.innerHTML=`Draws = ${this.numberOfDraws}`;
     }
-    setTime(curentTime){
-        this.stopTurn();
-        const timerContainer = document.querySelector(`.player${this.id}-timer`);
-        timerContainer.innerHTML=`${curentTime/60}:00`
-        timerContainer.setAttribute("time", `${curentTime}`);
-    }
-    startTurn(){
-        this.active=true;
-        this.#startTimer();
-    }
-    stopTurn(){
-        if (this.active) {
-            clearInterval(this.active);
-            this.active=false;
-        }
-    }
-    #startTimer(){
-        const timerContainer = document.querySelector(`.player${this.id}-timer`);
-        let seconds=Number(timerContainer.getAttribute("time"));
-        let minutes =0;
-        console.log(`Start timer ${this.id}`);
-        function conter(){
-            minutes = Math.floor(seconds/60);
-            let s=seconds%60;
-            timerContainer.innerHTML=`${minutes}:${s < 10 ? '0' + s :s}`;
-            timerContainer.setAttribute("time", `${seconds}`);
-            seconds--;
+    // setTime(curentTime){
+    //     this.stopTurn();
+    //     const timerContainer = document.querySelector(`.player${this.id}-timer`);
+    //     timerContainer.innerHTML=`${curentTime/60}:00`
+    //     timerContainer.setAttribute("time", `${curentTime}`);
+    // }
+    // startTurn(){
+    //     this.active=true;
+    //     this.#startTimer();
+    // }
+    // stopTurn(){
+    //     if (this.active) {
+    //         clearInterval(this.active);
+    //         this.active=false;
+    //     }
+    // }
+    // #startTimer(){
+    //     const timerContainer = document.querySelector(`.player${this.id}-timer`);
+    //     let seconds=Number(timerContainer.getAttribute("time"));
+    //     let minutes =0;
+    //     console.log(`Start timer ${this.id}`);
+    //     function conter(){
+    //         minutes = Math.floor(seconds/60);
+    //         let s=seconds%60;
+    //         timerContainer.innerHTML=`${minutes}:${s < 10 ? '0' + s :s}`;
+    //         timerContainer.setAttribute("time", `${seconds}`);
+    //         seconds--;
             
-        }
-        this.active=setInterval(conter,900);
-    }
+    //     }
+    //     this.active=setInterval(conter,900);
+    // }
 }
 
 class Board{
@@ -101,6 +100,9 @@ class Game{
             player1: new Player(1,time,"X"),
             player2: new Player(2,time,"O")
         };
+        
+        this.setTime(this.players.player1);
+        this.setTime(this.players.player2);
     }
    
     addEventListenersToBoaed(){
@@ -115,9 +117,9 @@ class Game{
                         this.turn=2;
                         console.log("This is it");
                         ///////////////////////////////9999999999999999999999999999999999999999//////
-                        this.players.player1.stopTurn();
+                        this.stopTurn(this.players.player1);
                         if (playerMoverResult!="Round ended") {
-                            this.players.player2.startTurn(); 
+                            this.startTurn(this.players.player2); 
                         }
                         playerMoverResult=false;
                     }
@@ -127,9 +129,9 @@ class Game{
                         if(playerMoverResult){
                             this.turn=1; 
                             console.log("This is it");
-                            this.players.player2.stopTurn()
+                            this.stopTurn(this.players.player2)
                             if (playerMoverResult!="Round ended") {
-                                this.players.player1.startTurn(); 
+                                this.startTurn(this.players.player1); 
                             }
                             playerMoverResult=false;
                         }
@@ -143,14 +145,14 @@ class Game{
         this.moves=[["-","-","-"],["-","-","-"],["-","-","-"]];
         this.board.createBoard();
         this.#switchSymbol();
-        this.players.player1.setTime(this.players.player1.time);
-        this.players.player2.setTime(this.players.player2.time); 
+        this.setTime(this.players.player1);
+        this.setTime(this.players.player2); 
         if (this.startPlayer==1) {
-            this.players.player2.startTurn();
+            this.startTurn(this.players.player2);
             this.startPlayer=2;
             this.turn=this.startPlayer;
         }else{
-            this.players.player1.startTurn();
+            this.startTurn(this.players.player1);
             this.startPlayer=1;
             this.turn=this.startPlayer;
         }
@@ -169,13 +171,6 @@ class Game{
             this.moves[Number(index[0])][Number(index[1])]=player.symbol;
 
             if (this.#checkWins(player.symbol)){ 
-                /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
-                /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
-                console.log("Stop Turn");
-                this.players.player1.stopTurn();
-                this.players.player2.stopTurn();
-                /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
-                /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
                 if (this.rounds>1) {
                     this.#showResult(this.turn)   
                 }else{
@@ -185,13 +180,6 @@ class Game{
             }
             else{
                 if (!this.#CheckTie()) {
-                    /*5555555555555555555555555555555555555555555555555555555555555555555555555555*/
-                    /*5555555555555555555555555555555555555555555555555555555555555555555555555555*/
-                    console.log("Stop Turn");
-                    this.players.player1.stopTurn();
-                    this.players.player2.stopTurn();
-                    /*5555555555555555555555555555555555555555555555555555555555555555555555555555*/
-                    /*5555555555555555555555555555555555555555555555555555555555555555555555555555*/
                     if (this.rounds>1) {
                         this.#showResult()
                     }else{
@@ -302,13 +290,6 @@ class Game{
     #showResult(prop=NaN){
         const resultContainer=document.querySelector('.round-Result');
         const roundResultContainer = document.querySelector('.round-result-container');
-        /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
-        /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
-        console.log("Stop Turn");
-        this.players.player1.stopTurn();
-        this.players.player2.stopTurn();
-        /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
-        /*55555555555555555555555555555555555555555555555555555555555555555555555555555555*/
         if (prop) {
             resultContainer.innerHTML=`Player ${prop} Won this round`;
         }
@@ -332,5 +313,66 @@ class Game{
             } 
         }
         roundResultContainer.classList.toggle("hidden")
+    }
+
+
+
+
+
+
+
+
+
+
+    setTime(playerObject){
+        this.stopTurn(playerObject);
+        const timerContainer = document.querySelector(`.player${playerObject.id}-timer`);
+        timerContainer.innerHTML=`${playerObject.time/60}:00`
+        timerContainer.setAttribute("time", `${playerObject.time}`);
+    }
+    startTurn(playerObject){
+        console.log(`Player ${playerObject.id} START.`);
+        playerObject.active=true;
+        this.#startTimer(playerObject);
+    }
+    #startTimer(playerObject){
+        const timerContainer = document.querySelector(`.player${playerObject.id}-timer`);
+        let seconds=Number(timerContainer.getAttribute("time"));
+        let minutes =0;
+        console.log(`Start timer ${playerObject.id}`);
+        function conter(game){
+            if (seconds>=0) {
+                minutes = Math.floor(seconds/60);
+                let s=seconds%60;
+                timerContainer.innerHTML=`${minutes}:${s < 10 ? '0' + s :s}`;
+                timerContainer.setAttribute("time", `${seconds}`);
+                seconds--;
+            }else{
+                let id = playerObject.id==1 ? 2 :1
+                if (id==1) {
+                    game.players.player1.addWin();
+                    game.players.player2.addLosse();
+                }
+                else{
+                    game.players.player2.addWin();
+                    game.players.player1.addLosse();
+                }
+                if (game.rounds-1>0) {
+                    game.#showResult(id);
+                }else{
+                    game.showGameResult();
+                }
+                clearInterval(playerObject.active);
+            }
+            
+        }
+        playerObject.active=setInterval(conter,10,this);
+    }
+    stopTurn(playerObject){
+        if (playerObject.active) {
+            console.log(`Player ${playerObject.id} STOP.`);
+            clearInterval(playerObject.active);
+            playerObject.active=false;
+        }
     }
 }

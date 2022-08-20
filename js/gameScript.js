@@ -14,7 +14,7 @@ const startGame =function(){
         const gTime= Number(gameTime.value.replace("min",""));
         const g = new Game(gRounds,gTime); 
         g.addEventListenersToBoaed();
-        g.players.player1.startTurn();
+        g.startTurn(g.players.player1);
         gameSettings.classList.toggle("hidden")  
     
         roundResult.addEventListener("click",(elm)=>{
@@ -39,16 +39,6 @@ const startGame =function(){
     
 }
 gameSettingButton.addEventListener("click",startGame);
-
-//  let time=4*60;
-// function conter(){
-//      const timer = document.querySelector(".player1-timer");
-//      const minutes=Math.floor(time/60);
-//      let seconds=time%60;
-//      timer.innerHTML=`${minutes}:${seconds < 10 ? '0' + seconds :seconds}`;
-//      time--;
-// }
-//  setInterval(conter,1000);
 
 
 
