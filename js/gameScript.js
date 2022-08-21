@@ -12,11 +12,8 @@ const startGame =function(){
     if (gameTime.value && gameRounds.value) {
         const gRounds=Number(gameRounds.value.replace("Rounds","").replace("Round",""));
         const gTime= Number(gameTime.value.replace("min",""));
-        const g = new Game(gRounds,gTime); 
-        g.addEventListenersToBoaed();
-        g.startTurn(g.players.player1);
-        gameSettings.classList.toggle("hidden")  
-    
+        const g = new Game(gRounds,gTime);
+        gameSettings.classList.toggle("hidden");
         roundResult.addEventListener("click",(elm)=>{
 
             if (elm.target.className=="submit-btn") {
