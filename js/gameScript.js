@@ -9,22 +9,20 @@ const gameResult = document.querySelector(".game-result-container")
 
 
 const startGame =function(){
+/* 
+    This function will start the game by taking the first user 
+    inputs and create game object from game class.
+*/
     if (gameTime.value && gameRounds.value) {
         const gRounds=Number(gameRounds.value.replace("Rounds","").replace("Round",""));
         const gTime= Number(gameTime.value.replace("min",""));
-        const g = new Game(gRounds,gTime);
+        const gameObject = new Game(gRounds,gTime);
         gameSettings.classList.toggle("hidden");
         roundResult.addEventListener("click",(elm)=>{
 
             if (elm.target.className=="submit-btn") {
-               roundResult.classList.toggle("hidden");
-               if (g.rounds>1) {
-                g.startNewRound() 
-               }
-               else {
-                console.log('The Game ended');
-                 
-               }
+                roundResult.classList.toggle("hidden");
+                gameObject.startNewRound() 
             } 
         })
     }

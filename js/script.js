@@ -1,5 +1,6 @@
 "use strict"
-/* Class */
+
+/*  Classes */
 class Player{
     /*
         This is class contain player attribute and methods
@@ -121,6 +122,9 @@ class Board{
 }
 
 class Timer{
+    /* 
+        This class controls players timer 
+    */
     constructor(gameObject,playerObject){
         this.playerObject=playerObject;
         this.gameObject=gameObject;
@@ -128,17 +132,26 @@ class Timer{
 
     }
     setTime(){
+    /* 
+        This method will set time for each player by taking it from player object. 
+    */
         this.stopTurn(this.playerObject);
         const timerContainer = document.querySelector(`.player${this.playerObject.id}-timer`);
         timerContainer.innerHTML=`${this.playerObject.time/60}:00`
         timerContainer.setAttribute("time", `${this.playerObject.time}`);
     }
     startTurn(){
+    /* 
+        This method will show countdown. 
+    */
         console.log(`Player ${this.playerObject.id} START.`);
         this.playerObject.active=true;
         this.#startTimer();
     }
     #startTimer(){
+    /* 
+        This method will start player timer 
+    */    
         const timerContainer = document.querySelector(`.player${this.playerObject.id}-timer`);
         let seconds=Number(timerContainer.getAttribute("time"));
         let minutes =0;
@@ -172,6 +185,9 @@ class Timer{
         this.playerObject.active=setInterval(conter,800,this.gameObject,this.playerObject);
     }
     stopTurn(){
+    /* 
+        This method will stop player timer 
+    */ 
         if (this.playerObject.active) {
             console.log(`Player ${this.playerObject.id} STOP.`);
             clearInterval(this.playerObject.active);
@@ -207,8 +223,7 @@ class Game{
         "X","O" and restart timer.
     */
         this.moves=[["-","-","-"],["-","-","-"],["-","-","-"]];
-        this.board.createBoard();
-        this.#switchSymbol();
+        this.board.createBoard(); 
         this.player1Timer.setTime();
         this.player2Timer.setTime();
         if (this.startPlayer==1) {
@@ -222,14 +237,7 @@ class Game{
         }
         this.rounds-=1
     }
-    #switchSymbol(){
-    /* 
-        This method  switch symbols "X","O".
-    */
-        let symbol=this.players.player1.symbol;
-        this.players.player1.symbol=this.players.player2.symbol;
-        this.players.player2.symbol=symbol;
-    }
+    
     addPlayerMove(player,index){
     /*
         This method will add player move and show it in the board and also
