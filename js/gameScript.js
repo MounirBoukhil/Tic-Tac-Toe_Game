@@ -5,7 +5,8 @@ const gameRounds=document.querySelector(".game-rounds-number");
 const gameSettingButton= document.querySelector(".game-setting-button");
 const gameSettings = document.querySelector(".game-settings");
 const roundResult =document.querySelector(".round-result-container");
-const gameResult = document.querySelector(".game-result-container")
+const gameResult = document.querySelector(".game-result-container");
+document.activeElement.blur();
 
 
 const startGame =function(){
