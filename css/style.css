@@ -1,61 +1,60 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
 
+:root {
+    --first-background: rgb(47, 69, 75);
+    --second-background: rgb(199, 255, 190);
+    --third-background:rgb(47, 69, 75);
+    --element-color:rgb(227, 255, 101);
+    --border-color:rgb(12, 15, 0);
+  }
+
 html ,body{
     margin: 0px;
     padding: 0px;
     height: 100%;
     width: 100%;
 }
+body{
+    background-color: var(--second-background);
+}
 /********************* All Header Elements Style *********************/
 header{
     /* Header Style */
     width: 100%;
-    height: 50px;
-    background-color: aliceblue;
+    height: 60px;
+    margin: 0px 0px 10px 0px;
+    background-color: rgba(47, 69, 75, 0.24);;
     display: flex;
+    border-bottom: solid 1px var(--border-color);
 
 }
 header .logo {
     /* Logo container style */
-    
-    background-color: red;
     flex: 1;
     display: flex;
     justify-content: center;
+    border: solid 2px rgb(0, 43, 8);
+    background-color: var(--first-background);
 
 }
 header .logo img{
     /* Logo image style */
-    background-color: yellow;
     height: 100%;
     width: 100px;
-    
-     
 }
-header .parameter{
-    /* icon parameter style */  
-    position: absolute;
-    height: 50px;
-    right: 0;
-    display: flex;
-    justify-content: flex-end;
-    background-color: blue; 
-     
-}
-header .parameter img{
-    /* icon parameter style */
-    background-color: yellow;
-    height: 100%;
-    width: 100px;
-     
-}
+
 /*********************************************************************/
 /********************* All Main Elements Style *********************/
 main{
     /* Header Style */ 
     display: flex; 
-    background-color: bisque;   
+    background-color: var(--second-background);   
 
+}
+main .player-container {
+    border-radius: 40px;
+    border: solid 3px var(--border-color);
+    margin: 500px;
 }
 main .player-container div{
     height: 100%;
@@ -63,13 +62,12 @@ main .player-container div{
 }
 main .player-container{
     margin: 0px;
-    background-color: rgb(255, 196, 247);
     flex: 1;
     display: flex; 
     flex-direction: column;
+    background-color: var(--third-background);
 }
 main .player-container div{
-    background-color: brown;
     margin: 5px;
 }
 
@@ -83,7 +81,7 @@ main .player-container .Player-Number-container .Player-Number{
     border-radius: 50%;
     width: 50%;
     height: 90%;
-    background-color: yellow;
+    background-color: var(--element-color);
 }
 /*******************************************************************/
 /********************** Player Score Style ************************/
@@ -99,32 +97,35 @@ main .player-container .Player-Score-container h2{
 main .player-container .Player-Timer-container .Timer{
     width: 90%;
     height: 40%;
-    background-color: aqua;
+    background-color: var(--element-color);
 }
 /*******************************************************************/
 /************************** Game Style *****************************/
 main .game-container  {
     margin: 0px;
-    background-color: rgb(220, 255, 196);
+    background-color:var(--second-background);
     flex: 3;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 main .game-container table,tr,td {
-    border: 1px solid;
+    border: 2px solid var(--border-color);
 }
 main .game-container table {
     display: flex;
+    border: 0px solid var(--border-color);
+    border-radius: 10px;
 }
 main .game-container table tr td {
-   background-color: blueviolet;
-   height: 220px;
-   width: 250px;
+   background-color: var(--third-background);
+   border-radius: 10px;
+   height: 210px;
+   width: 240px;
    cursor: pointer;
 }
 main .game-container table tr td:hover {
-    background-color: rgb(192, 226, 43);
+    background-color: var(--element-color);
  }
 main .game-container table tr td h1{
     margin: 0px;
