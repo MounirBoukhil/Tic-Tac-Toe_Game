@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 :root {
-    --first-background: rgb(47, 69, 75);
-    --second-background: rgb(199, 255, 190);
-    --third-background:rgb(47, 69, 75);
-    --element-color:rgb(227, 255, 101);
+    --first-background: rgb(37, 50, 54);
+    --second-background: rgb(110, 148, 105);
+    --third-background:rgb(43, 60, 65);
+    --element-color:rgb(168, 208, 132);
     --border-color:rgb(12, 15, 0);
+    --board-color:rgb(192, 211, 127);
   }
 
 html ,body{
@@ -34,7 +36,7 @@ header .logo {
     display: flex;
     justify-content: center;
     border: solid 2px rgb(0, 43, 8);
-    background-color: var(--first-background);
+    background-color: var(--third-background);
 
 }
 header .logo img{
@@ -47,26 +49,28 @@ header .logo img{
 /********************* All Main Elements Style *********************/
 main{
     /* Header Style */ 
-    display: flex; 
+    width: 100%;
+    height: 100%;
+    display: flex;  
+    align-items: center;
     background-color: var(--second-background);   
 
 }
 main .player-container {
-    border-radius: 40px;
-    border: solid 3px var(--border-color);
-    margin: 500px;
-}
-main .player-container div{
-    height: 100%;
+    height: 95%;
     width: 95%;
-}
-main .player-container{
-    margin: 0px;
+    border-radius: 40px;
+    border: solid 3px var(--border-color); 
+    margin: 5px;
     flex: 1;
     display: flex; 
     flex-direction: column;
     background-color: var(--third-background);
 }
+main .player-container div{
+    height: 95%;
+}
+
 main .player-container div{
     margin: 5px;
 }
@@ -77,27 +81,47 @@ main .player-container div{
     align-items: center;
 }
 /********************** Player Number Style ************************/
+main .player-container .player-title{
+    margin:0px ;
+    padding: 0px;
+    width: 100%;
+    color:var(--element-color) ;
+    border-bottom: 2px solid var(--element-color);
+    font-size: 2.5vw;
+}
+main .player-container .player-title h2{
+    margin: 0px;
+    padding: 0px;
+}
 main .player-container .Player-Number-container .Player-Number{
-    border-radius: 50%;
+    font-family: 'Lato', sans-serif;
     width: 50%;
     height: 90%;
-    background-color: var(--element-color);
+    color: var(--element-color);
+    font-size: 10vw;
+    margin: 0px;
 }
 /*******************************************************************/
 /********************** Player Score Style ************************/
 main .player-container .Player-Score-container{
+    font-size: 1.2vw;
     flex-direction: column;
     color: aliceblue;
+    margin: 0px;
 }
 main .player-container .Player-Score-container h2{
+    color: var(--element-color);
     margin: 10px ;
 }
 /*******************************************************************/
 /********************** Player Timer Style ************************/
 main .player-container .Player-Timer-container .Timer{
+    padding: 5px;
+    border-radius: 20px;
     width: 90%;
     height: 40%;
     background-color: var(--element-color);
+    color: rgb(0, 17, 5);
 }
 /*******************************************************************/
 /************************** Game Style *****************************/
@@ -123,14 +147,20 @@ main .game-container table tr td {
    height: 210px;
    width: 240px;
    cursor: pointer;
+   transition: 0.5s;
 }
 main .game-container table tr td:hover {
     background-color: var(--element-color);
  }
+main .game-container table tr td:hover > h1{
+    color: var(--first-background);
+ }
 main .game-container table tr td h1{
+    border-radius: 5px;
     margin: 0px;
     text-align: center;
     font-size: 180px;
+    color: var(--element-color);
     font-family: 'Lato', sans-serif;
 }
 /*******************************************************************/
@@ -151,7 +181,8 @@ main .game-container table tr td h1{
 }
 .game-settings-container div{
     cursor: context-menu;
-    background-color: rgb(2, 184, 142);
+    background-color:var(--second-background);
+    border: 2px solid var(--third-background);
     height: 300px;
     width: 450px;
     border-radius: 20px;
@@ -172,6 +203,7 @@ main .game-container table tr td h1{
     text-align: left;
 }
 .game-settings-container table tr td input{
+    border-radius: 5px;
     font-size: 15px;
     width: 70%;
 }
@@ -182,11 +214,11 @@ main .game-container table tr td h1{
     padding: 5px;
     font-size: 20px;
     border-radius: 10px;
-    border: solid 1px;
+    border: solid 2px var(--third-background);
     background-color: rgba(255, 222, 173, 0);
 }
 .game-settings-container table tr td button:hover{
-    background-color: blanchedalmond;
+    background-color:var(--element-color);
 }
 /*##########################################################################################*/
  
@@ -202,6 +234,7 @@ main .game-container table tr td h1{
     }
     main .player-container{
         flex-direction:row;
+        justify-content: space-around;
     }
     /*##########################################################################################*/
     /*################################# Player Container Style #################################*/
@@ -210,6 +243,10 @@ main .game-container table tr td h1{
     }
     main .player-container{
         height: 10vh;
+    }
+    main .player-container .player-title{
+        width: auto;
+        border-bottom: 0px;
     }
     /********************** Player Score Style **********************/
     main .player-container .Player-Score-container h2{
