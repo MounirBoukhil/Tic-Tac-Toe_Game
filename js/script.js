@@ -93,8 +93,7 @@ class Board{
                 if (game.turn==1) {
                     playerMoverResult=game.addPlayerMove(game.players.player1,box.id);
                     if(playerMoverResult){
-                        game.turn=2;
-                        console.log("This is it");
+                        game.turn=2; 
                         game.player1Timer.stopTurn();
                         if (playerMoverResult!="Round ended") {
                             game.player2Timer.startTurn(); 
@@ -105,8 +104,7 @@ class Board{
                     if (game.turn==2) {
                         playerMoverResult=game.addPlayerMove(game.players.player2,box.id);
                         if(playerMoverResult){
-                            game.turn=1; 
-                            console.log("This is it");
+                            game.turn=1;  
                             game.player2Timer.stopTurn();
                             if (playerMoverResult!="Round ended") {
                                 game.player1Timer.startTurn();
@@ -143,8 +141,7 @@ class Timer{
     startTurn(){
     /* 
         This method will show countdown. 
-    */
-        console.log(`Player ${this.playerObject.id} START.`);
+    */ 
         this.playerObject.active=true;
         this.#startTimer();
     }
@@ -153,14 +150,22 @@ class Timer{
         This method will start player timer 
     */    
         const timerContainer = document.querySelector(`.player${this.playerObject.id}-timer`);
+        const timerDiv1 = document.querySelector(`.player1-timer-container`);
+        const timerDiv2 = document.querySelector(`.player2-timer-container`);
         let seconds=Number(timerContainer.getAttribute("time"));
-        let minutes =0;
-        console.log(`Start timer ${this.playerObject.id}`);
+        let minutes =0; 
         function conter(game,playerObject){
             if (seconds>=0) {
                 minutes = Math.floor(seconds/60);
                 let s=seconds%60;
                 timerContainer.innerHTML=`${minutes}:${s < 10 ? '0' + s :s}`;
+                if (playerObject.id==1) {
+                    timerDiv1.classList.add("timer-active");
+                    timerDiv2.classList.remove("timer-active");
+                }else{
+                    timerDiv2.classList.add("timer-active");
+                    timerDiv1.classList.remove("timer-active");
+                }
                 timerContainer.setAttribute("time", `${seconds}`);
                 seconds--;
             }else{
@@ -188,8 +193,7 @@ class Timer{
     /* 
         This method will stop player timer 
     */ 
-        if (this.playerObject.active) {
-            console.log(`Player ${this.playerObject.id} STOP.`);
+        if (this.playerObject.active) { 
             clearInterval(this.playerObject.active);
             this.playerObject.active=false;
         }
